@@ -1,0 +1,197 @@
+<html>
+
+<head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <head>
+        <style>
+            body {
+            }
+            
+            h1 {
+                color: blue;
+            }
+            form {
+                color: black;
+            }
+            
+            form {
+                font-size: 30px;
+                text-align: left;
+            }
+            #topnav {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #87CEFA;
+                margin-top:0px; 
+                width: 100%;
+            }
+            #descollege{
+                margin-left: 50px;
+            }
+
+            #topnavli {
+                float: left;
+            }
+
+            #topnavli a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+            /* Change the link color to #111 (black) on hover */
+            #topnavli a:hover {
+                background-color: #4169E1;
+            }
+
+            input{
+                margin-left: 50px;
+            }
+          
+        </style>
+    </head>
+    
+        <script type="text/javascript">
+            
+             $(function() {
+                
+        var x = document.getElementById("desCollege");
+        var dataSchools = JSON.parse(sessionStorage.schools);
+        for(i=0;i<dataSchools.length;i++)
+            {
+                var satt = dataSchools[i].avgSAT;
+                var university = dataSchools[i].name;
+               
+                var option = document.createElement("option");
+                option.text = university;
+                option.value = satt;
+                x.add(option);        
+            }
+                           
+            })
+            
+            
+            
+            
+            google.charts.load('current', {
+                'packages': ['gauge']
+            });
+            google.charts.setOnLoadCallback(drawChart);
+            window.onload = function () {
+                document.getElementById("desCollege").addEventListener("click", drawChart);
+            }
+
+            function drawChart() {
+                var score = Number($("#satScore").val());
+                var college = Number($("#desCollege").val());
+                var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value']
+          , ['Your SAT Score', score]
+          , ['Average SAT Score', college]
+        , ]);
+                if (college >= 2100) {
+                    var options = {
+                        width: 1440
+                        , height: 432
+                        , redFrom: 600
+                        , redTo: 1600
+                        , greenFrom: 2100
+                        , greenTo: 2400
+                        , yellowFrom: 1600
+                        , yellowTo: 2100
+                        , minorTicks: 10
+                        , majorTicks: 2400
+                        , max: 2400
+                        , min: 0
+                        , easing: 'out'
+                    , };
+                }
+                if (college < 2100 && college >= 1800) {
+                    var options = {
+                        width: 1440
+                        , height: 432
+                        , redFrom: 600
+                        , redTo: 1600
+                        , greenFrom: 1800
+                        , greenTo: 2400
+                        , yellowFrom: 1600
+                        , yellowTo: 1800
+                        , minorTicks: 10
+                        , majorTicks: 2400
+                        , max: 2400
+                        , min: 0
+                        , easing: 'out'
+                    , };
+                }
+                if (college < 1800 && college >= 1500) {
+                    var options = {
+                        width: 1440
+                        , height: 432
+                        , redFrom: 600
+                        , redTo: 1250
+                        , greenFrom: 1500
+                        , greenTo: 2400
+                        , yellowFrom: 1250
+                        , yellowTo: 1500
+                        , minorTicks: 10
+                        , majorTicks: 2400
+                        , max: 2400
+                        , min: 0
+                        , easing: 'out'
+                    , };
+                }
+                if (college < 1500) {
+                    var options = {
+                        width: 1440
+                        , height: 432
+                        , redFrom: 600
+                        , redTo: 1000
+                        , greenFrom: 1200
+                        , greenTo: 2400
+                        , yellowFrom: 1000
+                        , yellowTo: 1200
+                        , minorTicks: 10
+                        , majorTicks: 2400
+                        , max: 2400
+                        , min: 0
+                        , easing: 'out'
+                    , };
+                }
+                var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+                chart.draw(data, options);
+            }
+        </script>
+    
+        
+                <body> 
+                    
+                    <ul id="topnav">
+  <li id="topnavli"><a href="index.html">Form</a></li>
+  <li id="topnavli"><a href="dreamschool.html">Dream School</a></li>
+  <li id="topnavli"><a href="compare.html">Compare Colleges</a></li>
+  <li id="topnavli"><a href="info.html">Lookup Colleges</a></li>
+  <li id="topnavli"><a href="Geotest.html">BigMap</a></li>
+<li id="topnavli" style="background-color:#4169E1"><a href="gauge.html">Test Score Evaluation</a></li>
+  <li id="topnavli"><a href="collegebubble.html">Multi-College Comparison</a></li>            
+</ul>
+                    
+                    <h5>Green represents excellent range, yellow represents mediocre, and red represents not in range.</h5>
+    
+                    <p>Your SAT Score:</p>
+                    <input type = number id="satScore" oninput="drawChart()">
+                    
+                <p>Desired College:</p>
+                    <select id="desCollege">
+                        <option value="0">Please Select</option>
+                    </select>
+                    
+                    <button type="button" onclick="drawChart()">Submit</button>
+                    
+                    <div id="chart_div" style="width: 400px; height: 120px;"></div>
+                </body>

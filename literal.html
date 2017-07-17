@@ -1,0 +1,57 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+
+      function drawChart() {
+
+        var data = new google.visualization.DataTable({
+          cols: [
+            {label: 'Day of Week', type: 'string'},
+            {label: 'Jason', type: 'number'},
+            {label: 'Kerry', type: 'number'},
+            {label: 'Megan', type: 'number'},
+            {label: 'Deliveries', type: 'number'}
+          ], rows: [
+            {c: [ {v: 'Monday'}, {v:21}, {v:18}, {v:15}, {v:23} ] },
+            {c: [ {v: 'Tuesday'}, {v:20}, {v:17}, {v:27}, {v:28} ] },
+            {c: [ {v: 'Wednesday'}, {v:39}, {v:34}, {v:31}, {v:42} ] },
+            {c: [ {v: 'Thursday'}, {v:32}, {v:37}, {v:33}, {v:37} ] },
+            {c: [ {v: 'Friday'}, {v:55}, {v:58}, {v:61}, {v:53} ] }
+          ]
+        });
+
+        var options = {
+          backgroundColor: {stroke: '#000', strokeWidth: 4, fill: '#bbb'},
+          curveType: 'function',
+          focusTarget: 'category',
+          hAxis: {title: 'Day of Week', titleTextStyle: {fontSize: 16}},
+          isStacked: true,
+          series: {3: {targetAxisIndex:1, type: "line"}},
+          seriesType: 'bars',
+          title: 'Tables Served vs. Deliveries',
+          titleTextStyle: {fontSize: 18},
+          tooltip: {showColorCode: true},
+          vAxes: [
+            {title: 'Tables Served', titleTextStyle: {fontSize: 16}},
+            {title: 'Deliveries', titleTextStyle: {fontSize: 16}}
+          ]
+        };
+
+        var chart = new google.visualization.ComboChart(
+          document.getElementById('chart'));
+        chart.draw(data, options);
+
+      }
+
+      google.load('visualization', '1.0', {
+        'packages': ['corechart'], 
+        'callback': drawChart
+      });
+
+    </script>
+  </head>
+  <body>
+    <div id="chart" style="width: 900px; height: 500px;"></div>
+  </body>
+</html>

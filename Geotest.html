@@ -1,0 +1,177 @@
+<html>
+
+<head>
+    <style>
+        #formframe {
+            margin-left: 160px;
+            margin-right: 160px;
+        }
+        
+        #submit {
+            border-radius: 12px;
+            background-color: #4169E1;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer
+        }
+        
+        #loc {
+            width: 100%;
+        }
+        
+        #topnav {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #87CEFA;
+            margin-top: 0px;
+        }
+        
+        #topnavli {
+            float: left;
+        }
+        
+        #topnavli a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        /* Change the link color to #111 (black) on hover */
+        
+        #topnavli a:hover {
+            background-color: #4169E1;
+        }
+        
+        #sidenav {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 200px;
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+
+<head>
+    <ul id="topnav">
+  <li id="topnavli"><a href="index.html">Form</a></li>
+  <li id="topnavli"><a href="dreamschool.html">Dream School</a></li>
+  <li id="topnavli"><a href="compare.html">Compare Colleges</a></li>
+  <li id="topnavli"><a href="info.html">Lookup Colleges</a></li>
+  <li id="topnavli" style="background-color:#4169E1"><a href="Geotest.html">BigMap</a></li>
+ <li id="topnavli"><a href="gauge.html">Test Score Evaluation</a></li>
+  <li id="topnavli"><a href="collegebubble.html">Multi-College Comparison</a></li>     
+</ul>
+</head>
+        <font> <h1>Undergrad Populations Map</h1></font>
+<body>
+    <div id="chart_div" style="width: 900px; height: 500px;"></div>
+
+    <body>
+
+        <script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script type='text/javascript'>
+            google.charts.load('current', {
+                'packages': ['geochart']
+            });
+            google.charts.setOnLoadCallback(drawMarkersMap);
+            
+            
+                function getColleges() {
+            var colData = JSON.parse(sessionStorage.schools);
+                    
+            var tempColleges = [];
+                    tempColleges.push(['State','ID','Undergrad Population']);
+                    for (i=0;i<colData.length;i++)
+                    {
+            var u = parseInt(colData[i].undergradPop);
+            var c = colData[i].city;
+            var s = colData[i].state;
+            var location = c + ", " + s;     
+                        
+            var n = colData[i].name;
+                    var tempCollege = [location,n,u];   
+                        tempColleges.push(tempCollege);
+                    }
+                    return tempColleges;
+           
+            }
+            
+            function drawMarkersMap() {       
+                var dataColleges = getColleges();
+                var data = google.visualization.arrayToDataTable(dataColleges
+                    
+                    
+                 /*  [
+         ['State', 'ID', 'Undergrad Population']
+    , ['Charlottesville, VA', 'University of Virginia', 15669]
+    , ['Stanford, CA', 'Stanford', 6994]
+    , ['Pittsburgh, PA', 'Carnegie Mellon University', 6306]
+    , ['State College, PA', 'Penn State University', 40451]
+    , ['Lynchburg, VA', 'Liberty University', 12645]
+    , ['Blacksburg, VA', 'Virginia Polytechnic Institute', 25318]
+    , ['South Bend, IN', 'University of Notre Dame', 8448]
+    , ['Oxford, OH', 'Miami University of Ohio', 15813]
+    , ['Winston-Salem, NC', 'Wake Forest University', 4867]
+    , ['Baton Rouge, LA', 'Lousiana State University', 25572]
+    , ['New Haven, CT', 'Yale University', 5477]
+    , ['Houston, TX', 'Rice University', 3926]
+    , ['Williamsburg, VA', 'William and Mary', 6299]
+    , ['Atlanta, GA', 'Georgia Tech', 14682]
+    , ['Santa Barbara, CA', 'University of California Santa Barbara', 20238]
+    , ['Austin, TX', 'University of Texas Austin', 39523]
+    , ['Rochester, MN', 'University of Minnesota Rochester', 7544]
+    , ['Cambridge, MA', 'Massachusetts Institute of Technology', 4512]
+    , ['Richmond, VA', 'Virginia Commonwealth University', 23962]
+    , ['Baltimore, MD', 'Johns Hopkins University', 5365]
+    , ['La Jolla, CA', 'University of California - San Diego', 22676]
+    , ['Villanova, PA', 'Villanova University', 7118]
+    , ['College Park, MD', 'University of Maryland', 27056]
+    , ['Columbus, OH', 'Ohio State University', 44741]
+    , ['Berkeley, CA', 'University of California, Berkeley', 27126]
+    , ['Ithaca, NY', 'Cornell University', 14453]
+    , ['Princeton, NJ', 'Princeton University', 5391]
+    , ['Durham, NC', 'Duke University', 6626]
+    , ['Pasadena, CA', 'California Institute of Technology', 983]
+    , ['Fairfax, VA', 'George Mason University', 22304]
+    , ['New York, NY', 'New York University', 25722]
+    , ['Harrisonburg, VA', 'James Madison University', 19396]
+    , ['Rochester, NY', 'Univesity of Rochester', 6304]
+    , ['New York, NY', 'Columbia University', 6102]
+    , ['Anchorage, Ak', 'University of Alaska Anchorage', 323]
+    , ['Seattle, WA', 'Seattle University', 4511]
+    , ['Brookings, SD', 'South Dakota State University', 9056]
+    , ['Fort Lauderdale, FL', 'Nova Southeastern University', 4699]
+    , ['Lincon,NE', 'University of Nebraska', 19979]
+    , ['Laramie, Wyoming', 'University of Wyoming', 10209]
+    ]
+             */                                                    );
+                var options = {
+                    region: 'US',
+                    resolution:'provinces'
+                    , displayMode: 'markers'
+                    , colorAxis: {
+                        colors: ['green', 'blue']
+                    }
+                };
+                var chart = new google.visualization.GeoChart(document.getElementById('chart_div'));
+                chart.draw(data, options);
+                
+            };
+                
+            
+        </script>
+    </body>
+</body>
+
+</html>

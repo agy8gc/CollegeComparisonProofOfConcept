@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+
+      function drawChart() {
+
+        var data, chart;
+        var url = "https://docs.google.com/spreadsheet/tq?key=<key>&range=A1:E6";
+        var queryString = "select A, B, C, D, (B+C+D)/3 label (B+C+D)/3 'Average'";
+
+        var options = {
+          backgroundColor: {stroke: '#000', strokeWidth: 4, fill: '#bbb'},
+          curveType: 'function',
+          focusTarget: 'category',
+          hAxis: {title: 'Day of Week', titleTextStyle: {fontSize: 16}},
+          series: {3: {type: "line"}},
+          seriesType: 'bars',
+          title: 'Tables Served vs. Deliveries',
+          titleTextStyle: {fontSize: 18},
+          tooltip: {showColorCode: true},
+          vAxes: [
+            {title: 'Tables Served', titleTextStyle: {fontSize: 16}},
+            {title: 'Deliveries', titleTextStyle: {fontSize: 16}}
+          ]
+        };
+
+        var query = new google.visualization.Query(url);
+        query.setQuery(queryString);
+        query.send(handleQueryResponse);
+
+        function handleQueryResponse(response) {
+          data = response.getDataTable();
+          chart = new google.visualization.ComboChart(document.getElementById('chart'));
+          chart.draw(data, options);
+        }
+
+      }
+
+      google.load('visualization', '1.0', {
+        'packages': ['corechart'], 
+        'callback': drawChart
+      });
+
+    </script>
+  </head>
+  <body>
+    <div id="chart" style="width: 900px; height: 500px;"></div>
+  </body>
+</html>

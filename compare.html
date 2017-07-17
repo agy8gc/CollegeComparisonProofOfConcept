@@ -1,0 +1,323 @@
+<html>
+
+<head>
+    <a href="dreamschool.html"></a>
+    <style>
+        #formframe {
+            margin-left: 70px;
+            margin-right: 160px;
+        }
+        
+        #field {
+            Width: 25%;
+            padding: 40px;
+            margin-right: 100px;
+            margin-left: 90px;
+        }
+        
+        #submit {
+            border-radius: 12px;
+            background-color: #4169E1;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer
+        }
+        
+        #loc {
+            width: 30%;
+        }
+        
+        #topnav {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #87CEFA;
+            margin-top: 0px;
+        }
+        
+        #topnavli {
+            float: left;
+        }
+        
+        #topnavli a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        /* Change the link color to #111 (black) on hover */
+        
+        #topnavli a:hover {
+            background-color: #4169E1;
+        }
+        
+        #sidenav {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 200px;
+            background-color: #f1f1f1;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    
+    <script>
+        $(function() {
+        var x = document.getElementById("SAT");
+        var y = document.getElementById("SAT2");
+        var dataSchools = JSON.parse(sessionStorage.schools);
+        for(i=0;i<dataSchools.length;i++)
+            {
+                var grades = dataSchools[i].avgGPA;
+                var satt = dataSchools[i].avgSAT;
+                var actt = dataSchools[i].avgACT;
+                var university = dataSchools[i].name;
+                var sco = satt + ", " + actt + ", " + grades;
+               
+                var option = document.createElement("option");
+                var option2 = document.createElement("option");
+                option.text = university;
+                option.value = sco;
+                option2.text = university;
+                option2.value = sco;
+                x.add(option);
+                y.add(option2);
+                
+            }
+            
+            
+            
+        });
+        
+          
+            google.charts.load('current', {
+                'packages': ['bar']
+            });
+        
+            function drawChart() {
+                var SAT = ($("#SAT").val()).split(", ");
+                SAT = Number(SAT[0]);
+                var SAT2 = ($("#SAT2").val()).split(", ");
+                SAT2 = Number(SAT2[0]);
+                var e = document.getElementById("SAT");
+                var name = e.options[e.selectedIndex].text;
+                var e = document.getElementById("SAT2");
+                var name2 = e.options[e.selectedIndex].text;
+                var data = google.visualization.arrayToDataTable([
+          ['SAT', name, name2, ]
+          , ['SAT scores', SAT, SAT2, ]
+        , ]);
+                var options = {
+                    chart: {
+                        title: ' '
+                        , subtitle: ' '
+                    , }
+                    , bars: 'vertical'
+                    , vAxis: {
+                        format: 'decimal'
+                    }
+                    , height: 400
+                    , colors: ['#1b9e77', '#d95f02', '#7570b3']
+                };
+                var chart = new google.charts.Bar(document.getElementById('chart_div'));
+                chart.draw(data, google.charts.Bar.convertOptions(options));
+                var ACT = ($("#SAT").val()).split(", ");
+                ACT = Number(ACT[1]);
+                var ACT2 = ($("#SAT2").val()).split(", ");
+                ACT2 = Number(ACT2[1]);
+                var data = google.visualization.arrayToDataTable([
+          ['ACT', name, name2, ]
+          , ['ACT scores', ACT, ACT2, ],
+
+
+        ]);
+                var options = {
+                    chart: {
+                        title: ' '
+                        , subtitle: ' '
+                    , }
+                    , bars: 'vertical'
+                    , vAxis: {
+                        format: 'decimal'
+                    }
+                    , height: 400
+                    , colors: ['#1b9e77', '#d95f02', '#7570b3']
+                };
+                var chart2 = new google.charts.Bar(document.getElementById('chart_div2'));
+                chart2.draw(data, google.charts.Bar.convertOptions(options));
+                var GPA = ($("#SAT").val()).split(", ");
+                GPA = Number(GPA[2]);
+                var GPA2 = ($("#SAT2").val()).split(", ");
+                GPA2 = Number(GPA2[2]);
+                var data = google.visualization.arrayToDataTable([
+          ['GPA', name, name2, ]
+          , ['GPA requirements', GPA, GPA2, ],
+
+
+        ]);
+                var options = {
+                    chart: {
+                        title: ' '
+                        , subtitle: ' '
+                    , }
+                    , bars: 'vertical'
+                    , vAxis: {
+                        format: 'decimal'
+                    }
+                    , height: 400
+                    , colors: ['#1b9e77', '#d95f02', '#7570b3']
+                };
+                var chart3 = new google.charts.Bar(document.getElementById('chart_div3'));
+                chart3.draw(data, google.charts.Bar.convertOptions(options));
+            }
+        
+
+        
+    </script>
+</head>
+
+<body>
+    <ul id="topnav">
+  <li id="topnavli"><a href="index.html">Form</a></li>
+  <li id="topnavli"><a href="dreamschool.html">Dream School</a></li>
+  <li id="topnavli"  style="background-color:#4169E1"><a href="compare.html">Compare Colleges</a></li>
+  <li id="topnavli"><a href="info.html">Lookup Colleges</a></li>
+  <li id="topnavli"><a href="Geotest.html">BigMap</a></li>
+  <li id="topnavli"><a href="gauge.html">Test Score Evaluation</a></li> 
+  <li id="topnavli"><a href="collegebubble.html">Multi-College Comparison</a></li>     
+</ul>
+    <form action="action_page.php">
+        <fieldset id="formframe">
+            <legend style="text-align:center">
+                <h1>College Comparison Tool</h1> </legend>
+            <fieldset>
+                <legend>
+                    <h3>Pick two colleges to begin</h3></legend>
+                <table>
+                    <td>
+                        <fieldset id="field">
+                            <p>
+                                <label for="card"> <span><b>Select College</b></span>
+                                
+                                    <select id="SAT" name="College Name">
+                                         <option value="N/A">Please Select</option>
+                                        <!--<option value="2009, 30, 4.2">University of Virginia</option>
+                                        <option value="2220, 33, 4.2">Stanford University </option>
+                                        <option value="2117, 32, 3.9">Carnegie Mellon University</option>
+                                        <option value="1910, 36, 3.6">Penn State University</option>
+                                        <option value="1522, 22, 3.4">Liberty University</option>
+                                        <option value="1840, 28, 3.6">Virginia Polytechnic Institute</option>
+                                        <option value="2000, 31, 3.8">University of Notre Dame</option>
+                                        <option value="1830, 28, 3.5">Miami University of Ohio</option>
+                                        <option value="1890, 29, 3.7">Wake Forest University</option>
+                                        <option value="1650, 26, 3.3">Lousiana State University</option>
+                                        <option value="2270, 36, 4.2">Yale University</option>
+                                        <option value="2180, 33, 4.1">Rice University</option>
+                                        <option value="1930, 31, 4.2">William And Mary</option>
+                                        <option value="2049, 31, 4.0">Georgia Tech</option>
+                                        <option value="1926, 29, 4.0">University of California Santa Barbara</option>
+                                        <option value="1873, 28, 3.7">University of Texas Austin</option>
+                                        <option value="1700, 24, 3.6">University of Minnesota Rochester</option>
+                                        <option value="2200, 34, 4.1">Massachusetts Institute of Technology</option>
+                                        <option value="1651, 24, 3.6">Virginia Commonwealth University</option>
+                                        <option value="2117, 33, 3.7">Johns Hopkins University</option>
+                                        <option value="2035, 30, 4.1">University of California - San Diego</option>
+                                        <option value="1949, 30, 3.9">Villanova University</option>
+                                        <option value="3100, 30, 4.1">University of Maryland</option>
+                                        <option value="1864, 28, 3.7">Ohio State University</option>
+                                        <option value="2055, 31, 3.9">University of California, Berkeley</option>
+                                        <option value="2120, 32, 4.0">Cornell University</option>
+                                        <option value="2250, 33, 3.9">Princeton University</option>
+                                        <option value="2250, 34, 4.2">Duke University</option>
+                                        <option value="2300, 34, 4.2">California Institute of Technology</option>
+                                        <option value="1150, 26, 3.7"> George Mason University</option>
+                                        <option value="2016, 30, 3.7">New York University</option>
+                                        <option value="1150, 25, 3.5">James Madison University</option>
+                                        <option value="2005, 31, 3.8">Univesity of Rochester</option>
+                                        <option value="2215, 34, 4.1">Columbia University</option>
+                                        <option value="1490, 28, 3.0">University of Alaska Anchorage</option>
+                                        <option value="1700, 24, 3.6">Seattle University</option>
+                                        <option value="1540, 23, 3.3">South Dakota State University</option>
+                                        <option value="1970, 21, 3.9">Nova Southeastern University</option>
+                                        <option value="1175, 25, 3.6">University of Nebraska &#45; Lincoln</option>
+                                        <option value="1430, 19, 2.3">University of Wyoming</option> -->
+                                    </select>
+                        
+                                </label>
+                            </p>
+                        </fieldset>
+                    </td>
+                    <td>
+                        <fieldset id="field">
+                            <p>
+                                <label for="card"> <span><b>Select College</b></span>
+                                    <select id="SAT2" name="College Name">
+                                        <option value="N/A">Please Select</option>
+                                        <!--<option value="2009, 30, 4.2">Universtiy of Virginia</option>
+                                        <option value="2220, 33, 4.2">Stanford University </option>
+                                        <option value="2117, 32, 3.9">Carnegie Mellon University</option>
+                                        <option value="1910, 36, 3.6">Penn State University</option>
+                                        <option value="1522, 22, 3.4">Liberty University</option>
+                                        <option value="1840, 28, 3.6">Virginia Polytechnic Institute</option>
+                                        <option value="2000, 31, 3.8">University of Notre Dame</option>
+                                        <option value="1830, 28, 3.5">Miami University of Ohio</option>
+                                        <option value="1890, 29, 3.7">Wake Forest University</option>
+                                        <option value="1650, 26, 3.3">Lousiana State University</option>
+                                        <option value="2270, 36, 4.2">Yale University</option>
+                                        <option value="2180, 33, 4.1">Rice University</option>
+                                        <option value="1930, 31, 4.2">William And Mary</option>
+                                        <option value="2049, 31, 4.0">Georgia Tech</option>
+                                        <option value="1926, 29, 4.0">University of California Santa Barbara</option>
+                                        <option value="1873, 28, 3.7">University of Texas Austin</option>
+                                        <option value="1700, 24, 3.6">University of Minnesota Rochester</option>
+                                        <option value="2200, 34, 4.1">Massachusetts Institute of Technology</option>
+                                        <option value="1651, 24, 3.6">Virginia Commonwealth University</option>
+                                        <option value="2117, 33, 3.7">Johns Hopkins University</option>
+                                        <option value="2035, 30, 4.1">University of California - San Diego</option>
+                                        <option value="1949, 30, 3.9">Villanova University</option>
+                                        <option value="3100, 30, 4.1">University of Maryland</option>
+                                        <option value="1864, 28, 3.7">Ohio State University</option>
+                                        <option value="2055, 31, 3.9">University of California, Berkeley</option>
+                                        <option value="2120, 32, 4.0">Cornell University</option>
+                                        <option value="2250, 33, 3.9">Princeton University</option>
+                                        <option value="2250, 34, 4.2">Duke University</option>
+                                        <option value="2300, 34, 4.2">California Institute of Technology</option>
+                                        <option value="1150, 26, 3.7"> George Mason University</option>
+                                        <option value="2016, 30, 3.7">New York University</option>
+                                        <option value="1150, 25, 3.5">James Madison University</option>
+                                        <option value="2005, 31, 3.8">Univesity of Rochester</option>
+                                        <option value="2215, 34, 4.1">Columbia University</option>
+                                        <option value="1490, 28, 3.0">University of Alaska Anchorage</option>
+                                        <option value="1700, 24, 3.6">Seattle University</option>
+                                        <option value="1540, 23, 3.3">South Dakota State University</option>
+                                        <option value="1970, 21, 3.9">Nova Southeastern University</option>
+                                        <option value="1175, 25, 3.6">University of Nebraska &#45; Lincoln</option>
+                                        <option value="1430, 19, 2.3">University of Wyoming</option> -->
+                                    </select>
+                                </label>
+                            </p>
+                        </fieldset>
+                </table>
+                <center>
+                    <button id="submit" type="button" onclick="drawChart()">Submit</button>
+                    <div id="chart_div"></div>
+                    <br>
+                    <div id="chart_div2"></div>
+                    <br>
+                    <div id="chart_div3"></div>
+                    <br> </center>
+            </fieldset>
+        </fieldset>
+    </form>
+</body>
+
+</html>

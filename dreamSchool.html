@@ -1,0 +1,135 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>University Info</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+            
+        <script>    
+                  
+        var scores = [
+        ["university", "percent"]
+        ];
+            
+        function rateCollege()
+        {
+                var dataSchools = JSON.parse(sessionStorage.schools);
+                var sat = document.getElementById("sat").value;
+                var act = document.getElementById("act").value;
+                var gpa = document.getElementById("gpa").value;
+            
+                for(i=0;i<dataSchools.length;i++)
+                { 
+                        var university = dataSchools[i].name;
+                        
+                        var s = (sat - Number(dataSchools[i].avgSAT)) / dataSchools[i].avgSAT ; //part over whole. duh!
+                        var a = (act - Number(dataSchools[i].avgACT)) / dataSchools[i].avgACT;
+                        var best;
+                        
+                        if(s <= a){
+                            best = a;
+                        }
+                        else{
+                            best = s;
+                        }
+                        var g = (gpa - Number(dataSchools[i].avgGPA)) / dataSchools[i].avgGPA;
+                        
+                        var overall = (g + best)/2;
+                        scores.push([university, overall]);
+                }
+            findBest();
+        }
+            
+        function findBest()
+        {
+            var collegescore = 100;
+            var college = "none";
+            for(i = 1; i < scores.length; i++)
+            {
+                if((scores[i])[1] < Math.abs(collegescore))
+                {
+                    collegescore = (scores[i])[1];
+                    college = (scores[i])[0];
+                }
+            }
+            document.getElementById("drums").innerHTML = "Your top college pick is";
+            setTimeout(addDot, 500);
+            setTimeout(addDot, 1000);
+            setTimeout(addDot, 1500);
+            
+            setTimeout(function(){
+                 document.getElementById("college").innerHTML = college;}
+            ,2500);
+        }
+        
+            function addDot(){
+                document.getElementById("drums").innerHTML = document.getElementById("drums").innerHTML + ".";
+            }
+            
+        </script>
+        
+        <style>
+            #topnav {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #87CEFA;
+                margin-top:0px; 
+                width: 100%;
+            }
+
+            #topnavli {
+                float: left;
+            }
+
+            #topnavli a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+            /* Change the link color to #111 (black) on hover */
+            #topnavli a:hover {
+                background-color: #4169E1;
+            }
+
+            input{
+                margin-left: 50px;
+            }
+            
+            
+        </style>
+    </head>
+    
+    <body>    
+        
+        <ul id="topnav">
+  <li id="topnavli"><a href="index.html">Form</a></li>
+  <li id="topnavli" style="background-color:#4169E1"><a href="dreamschool.html">Dream School</a></li>
+  <li id="topnavli"><a href="compare.html">Compare Colleges</a></li>
+  <li id="topnavli"><a href="info.html">Lookup Colleges</a></li>
+  <li id="topnavli"><a href="Geotest.html">BigMap</a></li>
+ <li id="topnavli"><a href="gauge.html">Test Score Evaluation</a></li>
+  <li id="topnavli"><a href="collegebubble.html">Multi-College Comparison</a></li>     
+</ul>
+        <center>
+        <h2>Add in your info:</h2>
+        <h4>SAT score:</h4>
+        <input type = "number" id="sat" value="Your SAT score"><br>
+        
+        <h4>ACT score:</h4>
+        <input type = "number" id="act" value="Your ACT score"><br>
+        
+        <h4>GPA score:</h4>
+        <input type = "number" id="gpa" value="Your GPA"><br>
+        
+        <button type=button onclick="rateCollege()">Submit</button>
+            
+        </center>    
+        <h2 id = "drums"></h2>
+        <h1 id="college"></h1>        
+        
+    </body>
+</html>

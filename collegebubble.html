@@ -1,0 +1,251 @@
+<html>
+
+<head>
+    <Title>Universities SAT and Tution</Title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    
+    <style>
+    #topnav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #87CEFA;
+    margin-top:0px; 
+}
+
+#topnavli {
+    float: left;
+}
+
+#topnavli a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+#topnavli a:hover {
+    background-color: #4169E1;
+}
+       #sidenav{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #f1f1f1;
+}
+    </style>
+        
+     <script type="text/javascript"> 
+         
+         function getColleges() {
+            var colData = JSON.parse(sessionStorage.schools);
+                    
+            var tempColleges = [];
+                    for (i=0;i<colData.length;i++)
+                    {
+            var u = parseInt(colData[i].undergradPop);
+            var s = colData[i].state;     
+            var n = colData[i].name;
+            var os = parseInt(colData[i].oos);
+            var satt = parseInt(colData[i].avgSAT);
+            var inst = parseInt(colData[i].is);
+            var c = colData[i].city;
+            var sett = colData[i].setting;  
+            var pop = colData[i].type;
+            var dets = c + "-" + sett + "/" + pop;            
+                    var tempCollege = [os, s, n, satt, inst, dets, u];   
+                        tempColleges.push(tempCollege);
+                    }
+                    return tempColleges;
+           
+            }
+        var realData = getColleges(); 
+        var rawData = realData;
+            
+            /*[
+                 [43082, 'Virginia', 'UVA', 2009, 14468, 'Charlottesville-Rural/Public', 15669]
+                , [46000, 'California', 'Stanford', 2200, 46000, 'Stanford-Suburban/Private', 6994]
+                , [47600, 'Pennsylvania', 'Carnegie', 2117, 47600, 'Pittsburgh-Urban/Private', 6306]
+                , [31346, 'PA', 'Penn State', 1910, 17514, 'State College-Suburban/Public', 40451]
+                , [25800, 'VA', 'Liberty', 1522, 21000, 'Lynchberg-Suburban/Public', 12645]
+                , [40791, 'VA', 'VT', 1840, 24751, 'Blacksburg-Rural/Public', 25318]
+                , [64755, 'IN', 'Notre Dame', 2000, 64775, 'South Bend-Suburban/Private', 8448]
+                , [46658, 'OH', 'Miami of Ohio', 1830, 29958, 'Oxford-Rural/Public', 15813]
+                , [64478, 'NC', 'Wake Forest', 1890, 64478, 'Winston Salem-Suburban/Private', 4867]
+                , [42272, 'LA', 'Lousiana State', 1650, 24863, 'Baton Rouge-Urban/Public', 25572]
+                , [45800, 'CT', 'Yale', 2270, 45800, 'New Haven-Urban/Private', 5477]
+                , [40566, 'TX', 'Rice', 2180, 40566, 'Houston-Urban/Private', 3928]
+                , [36158, 'VA', 'W&M', 1930, 15674, 'Willamsburg-Suburban/Public', 6299]
+                , [28860, 'GA', 'Geogia Tech', 2049, 10584, 'Atlanta-Urban/Public', 14682]
+                , [52183, 'CA', 'UCSanta Barbra', 1926, 29305, 'Santa Barbra-Suburban/Public', 20238]
+                , [51352, 'TX', 'UofTexas Austin', 1873, 26346, 'Austin-Urban/Public', 39523]
+                , [23640, 'MN', 'UofMN Rochester', 1700, 11720, 'Rochester-Urban/Public', 7544]
+                , [44720, 'MA', 'MIT', 2200, 43210, 'Cambrige-Urban/Private', 4512]
+                , [26537, 'OH', 'Ohio State ', 1864, 10037, 'Columbus-Public/Urban', 44741]
+                , [38140, 'CA', 'UC Berkeley', 2055, 13432, 'Berkeley-Public/Urban', 27126]
+                , [49116, 'NY', 'Cornell ', 2120, 49116, 'Ithaca-Private/Rural', 14315]
+                , [43450, 'NJ', 'Princeton ', 2250, 43450, 'Princeton-Private/Suburban', 5391]
+         , [49341, 'NC', 'Duke', 2250, 49341, 'Durham-Private/Suburban', 6626]
+              , [45391, 'CA', 'CAL Tech', 2300, 45391, 'Pasadena-Private/Suburban', 983]
+              , [32582, 'VA', 'George Mason ( GMU)', 1150, 11300, 'Fairfax-Public/Suburban', 22304]
+            , [49062, 'NY', 'NYU', 2016, 49062, 'New York-Private/Urban', 24985]
+            , [26116, 'VA', 'JMU ', 1150, 10342, 'Harrisonburg-Public/Rural', 19396]
+             , [50142, 'NY', 'U of Rochester', 2005, 50142, 'Rochester-Private/Suburban', 6266]
+              , [55161, 'NY', 'Columbia', 2215, 55161, 'New York-Private/Urban', 6170]
+                , [30838, 'VA', 'VCU', 1650, 12772, 'Richmond-Public/Urban', 23962]
+                , [50910, 'MD', 'John Hopkins', 2117, 50910, 'Baltimore-Private/Urban', 5365]
+                , [38066, 'CA', 'UC San Diego', 2035, 14042, 'La Jolla-Public/Suburban', 22676]
+                , [47616, 'PA', 'Villanova', 1949, 47616, 'Villanova-Private/Suburban', 7118]
+                , [31144, 'MD', 'U of Maryland', 1310, 9996, 'College Park-Public/Suburban', 27056]
+                , [35268, 'AK', 'U of AK Anchorage', 1490, 21306, 'Anchorage-Public/Rural', 16463]
+                , [54705, 'WA', 'Seatle U', 1700, 54705, 'Seatle-Private/Urban', 4511]
+                , [19384, 'SD', 'SD State', 1540, 16174, 'Brookings-Public/Rural', 10951]
+                , [43946, 'FL', 'Nova Southeastern', 1970, 43946, 'Fort Lauderdale-Private/Suburban', 4699]
+                , [37456, 'NE', 'U of NE Lincon', 1175, 23289, 'Lincon-Public/Suburban', 19979]
+                , [26184, 'WY', 'U of Wyoming', 1430, 15024, 'Laramie-Public/Rural', 10124]
+
+            ]*/
+
+      
+     
+        function drawSeriesChart() {
+            var userState = $("select#ddlState").val();
+            console.log(userState);
+            var dataArr = [['ID', 'SAT', 'Tuition', 'Location-Region/Status', 'UndergradPopulation']];
+            var row;
+            $.each(rawData, function (index, uni) {
+                //if uni[1] is checked or if nothing is checked
+                if ($(".cbxState[value='" + uni[1] + "']:checked").length > 0 || $(".cbxState:checked").length == 0) {
+                    if (userState == uni[1]) {
+                        //in state
+                        row = [uni[2], uni[3], uni[4], uni[5], uni[6]];
+                    }
+                    else {
+                        row = [uni[2], uni[3], uni[0], uni[5], uni[6]];
+                    }
+                    dataArr.push(row);
+                }
+            });
+            var user
+            var data = google.visualization.arrayToDataTable(dataArr);
+            var options = {
+                zoom: true
+                , legend: 'none'
+                , title: ''
+                , hAxis: {
+                    title: 'Avg. SAT'
+                }
+                , vAxis: {
+                    title: 'Avg. Tution'
+                }
+                , bubble: {
+                    textStyle: {
+                        fontSize: 11
+                    }
+                }
+            , };
+            var chart = new google.visualization.BubbleChart(document.getElementById('series_chart_div'));
+            chart.draw(data, options);
+        }
+        $(document).ready(function () {
+            $("#ddlState").change(function () {
+                drawSeriesChart();
+            })
+            google.load('visualization', '1.0', {
+                'packages': ['corechart']
+                , 'callback': drawSeriesChart
+            });
+            var uniqueStates = [];
+            $.each(rawData, function (index, arrItem) {
+                if ($.inArray(arrItem[1], uniqueStates) == -1) {
+                    uniqueStates.push(arrItem[1]);
+                }
+            });
+            uniqueStates.sort();
+            $.each(uniqueStates, function (index, arrItem) {
+                $("#divCbxUni").append('<label><input type="checkbox" class="cbxState" name="checkbox" value="' + arrItem + '">' + arrItem + '</label>')
+            });
+        });
+    </script>
+</head>
+
+<body> 
+    <ul id="topnav">
+  <li id="topnavli"><a href="index.html">Form</a></li>
+  <li id="topnavli"><a href="dreamschool.html">Dream School</a></li>
+  <li id="topnavli"><a href="compare.html">Compare Colleges</a></li>
+  <li id="topnavli"><a href="info.html">Lookup Colleges</a></li>
+  <li id="topnavli"><a href="Geotest.html">BigMap</a></li>
+<li id="topnavli"><a href="gauge.html">Test Score Evaluation</a></li>
+  <li id="topnavli"><a href="collegebubble.html" style="background-color:#4169E1">Multi-College Comparison</a></li>            
+</ul>
+    
+    What state are you from?
+   <select id="ddlState">
+        <option value="select state">select state</option>
+        <option value="Alabama">AL</option>
+        <option value="Alaska">AK</option>
+        <option value="Arizona">AZ</option>
+        <option value="Arkansas">AR</option>
+        <option value="California">CA</option>
+        <option value="Colorado">CO</option>
+        <option value="Connecticut">CT</option>
+        <option value="Delaware">DE</option>
+        <option value="District of Columbia">DC</option>
+        <option value="Florida">FL</option>
+        <option value="Georgia">GA</option>
+        <option value="Hawaii">HI</option>
+        <option value="Idaho">ID</option>
+        <option value="Illinos">IL</option>
+        <option value="Indiana">IN</option>
+        <option value="Iowa">IA</option>
+        <option value="Kansas">KS</option>
+        <option value="Kentucky">KY</option>
+        <option value="Louisiana">LA</option>
+        <option value="Maine">ME</option>
+        <option value="Maryland">MD</option>
+        <option value="Massachusetts">MA</option>
+        <option value="Michigan">MI</option>
+        <option value="Minnesota">MN</option>
+        <option value="Mississippi">MS</option>
+        <option value="Missouri">MO</option>
+        <option value="Montana">MT</option>
+        <option value="Nebraska">NE</option>
+        <option value="Nevada">NV</option>
+        <option value="New Hampshire">NH</option>
+        <option value="New Jersey">NJ</option>
+        <option value="New Mexico">NM</option>
+        <option value="New York">NY</option>  
+        <option value="North Carolina">NC</option>
+        <option value="North Dakota">ND</option>
+        <option value="Ohio">OH</option>
+        <option value="Oklahoma">OK</option>
+        <option value="Oregon">OR</option>
+        <option value="Pennsylvania">PA</option>
+        <option value="Rhode Island">RI</option>
+        <option value="South Carolina">SC</option>
+        <option value="South Dakota">SD</option>
+        <option value="Tennessee">TN</option>
+        <option value="Texas">TX</option>
+        <option value="Utah">UT</option>
+        <option value="Vermont">VT</option>
+        <option value="Virginia">VA</option>
+        <option value="Washington">WA</option>
+        <option value="West Virgina">WV</option>
+        <option value="Wisconsin">WI</option>
+        <option value="Wyoming">WY</option>
+        <option value="N/A">N/A</option>
+    </select>
+    <div id="series_chart_div" style="width: 900px; height: 500px;"></div>
+    <fieldset>
+        <legend id=check> Which states would you like to go to school in?</legend>
+        <div id="divCbxUni"> </div>
+        <input type="button" value="Submit to see results" onclick="drawSeriesChart()" /> </fieldset>
+</body>
+
+</html>

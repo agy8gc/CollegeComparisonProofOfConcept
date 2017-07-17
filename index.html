@@ -1,0 +1,441 @@
+<html>
+  <head>
+      <script src="jquery.js" type="text/javascript"></script>
+      <script type="text/javascript">
+         
+         var collegeDatabase = {}; 
+        $(function() 
+        {
+            if (sessionStorage.getItem("schools") === null) {
+             collegeDatabase.colleges = [];
+                
+            var college1 = {};
+            college1.name = "Virginia Tech";
+            college1.abbreviation = "VT";
+            college1.undergradPop = "25318";
+            college1.city = "Blacksburg";
+            college1.state = "Virginia";
+            college1.avgGPA = "3.6";
+            college1.avgSAT = "1840";
+            college1.avgACT = "28";
+            college1.acceptRate = "71";
+            college1.oos = "40791";
+            college1.is = "24751";
+            college1.gradPop = "4793";
+            college1.type = "Public";
+            college1.setting = "Rural";    
+            collegeDatabase.colleges.push(college1);
+            
+            var college2 = {};
+            college2.name = "Georgia Tech";
+            college2.abbreviation = "GT";
+            college2.undergradPop = "14682";
+            college2.city = "Atlanta";
+            college2.state = "Georgia";
+            college2.avgGPA = "4.0";
+            college2.avgSAT = "2049";
+            college2.avgACT = "31";
+            college2.acceptRate = "25";
+            college2.oos = "28860";
+            college2.is = "10584";
+            college2.gradPop = "8427";
+            college2.type = "Public";
+            college2.setting = "Urban";    
+            collegeDatabase.colleges.push(college2); 
+             
+            var college3 = {};
+            college3.name = "Stanford University";
+            college3.abbreviation = "S";
+            college3.undergradPop = "6994";
+            college3.city = "Stanford";
+            college3.state = "California";
+            college3.avgGPA = "4.2";
+            college3.avgSAT = "2220";
+            college3.avgACT = "33";
+            college3.acceptRate = "4.7";
+            college3.oos = "43082";
+            college3.is = "14468";
+            college3.gradPop = "9128";
+            college3.type = "Private";
+            college3.setting = "Suburban";    
+            collegeDatabase.colleges.push(college3); 
+                
+            var college4 = {};
+            college4.name = "Virginia Commonwealth University";
+            college4.abbreviation = "VCU";
+            college4.undergradPop = "23962";
+            college4.city = "Richmond";
+            college4.state = "Virginia";
+            college4.avgGPA = "3.6";
+            college4.avgSAT = "1651";
+            college4.avgACT = "24";
+            college4.acceptRate = "64";
+            college4.oos = "30838";
+            college4.is = "12772";
+            college4.gradPop = "7201";
+            college4.type = "Public";
+            college4.setting = "Urban";    
+            collegeDatabase.colleges.push(college4);   
+        
+            var college5 = {};
+            college5.name = "University of Alaska at Anchorage";
+            college5.abbreviation = "UAA";
+            college5.undergradPop = "16463";
+            college5.city = "Anchorage";
+            college5.state = "Alaska";
+            college5.avgGPA = "3.0";
+            college5.avgSAT = "1490";
+            college5.avgACT = "28";
+            college5.acceptRate = "78";
+            college5.oos = "35286";
+            college5.is = "21306";
+            college5.gradPop = "858";
+            college5.type = "Public";
+            college5.setting = "Rural";    
+            collegeDatabase.colleges.push(college5);      
+                
+            sessionStorage.schools = JSON.stringify(collegeDatabase.colleges);
+                
+                
+                }
+          else
+                {
+                    collegeDatabase = {};
+            collegeDatabase.colleges = JSON.parse(sessionStorage.schools);        
+                }
+            
+        });
+          
+        function addCollege() {
+            var college = {};
+            college.name = document.getElementById("name").value;
+            college.abbreviation = document.getElementById("abbrev").value;
+            college.undergradPop = document.getElementById("under").value;
+            college.city = document.getElementById("city").value;
+            college.state = document.getElementById("State").value;
+            college.avgGPA = document.getElementById("gpa").value;
+            college.avgSAT = document.getElementById("sat").value;
+            college.avgACT = document.getElementById("act").value;
+            college.acceptRate = document.getElementById("accept").value;
+            college.oos = document.getElementById("oos").value;
+            college.is = document.getElementById("is").value;
+            college.gradPop = document.getElementById("graduate").value;
+            
+            if (document.getElementById("pub").checked) {
+            college.type = "Public";
+             } 
+            else
+                {
+                college.type = "Private";
+                }
+            
+            if (document.getElementById("urb").checked) 
+            {
+                college.setting = "Urban";
+             } 
+            else if (document.getElementById("sub").checked) 
+                {
+                college.setting = "Suburban";
+                }
+            else
+                college.setting = "Rural";
+            
+            collegeDatabase.colleges.push(college);
+            sessionStorage.schools = JSON.stringify(collegeDatabase.colleges);
+            
+            document.theForm.reset();
+            
+            alert("Submit Another Form or Continue To Our Other Great Tools!");
+        }
+          
+          
+
+        
+      </script>
+              
+    <style>
+table
+        {
+         margin-left:auto;
+         margin-right:auto;
+        }
+#formframe
+        {
+            
+             margin-left: 240px;
+            margin-right: 240px;
+        }
+        #submit{
+            border-radius: 12px;
+            background-color: #4169E1;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer
+        }
+        #loc{
+           
+        width:30%;
+        }
+#topnav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #87CEFA;
+    margin-top:0px; 
+}
+
+#topnavli {
+    float: left;
+}
+
+#topnavli a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+#topnavli a:hover {
+    background-color: #4169E1;
+}
+       #sidenav{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #f1f1f1;
+}
+       #loc
+        {
+        vertical-align: baseline;
+        }
+td
+        {
+            vertical-align: top;
+        }
+       
+
+</style>
+  </head>
+  <body>
+      <ul id="topnav">
+  <li id="topnavli" style="background-color:#4169E1"><a href="index.html">Form</a></li>
+  <li id="topnavli"><a href="dreamschool.html">Dream School</a></li>
+  <li id="topnavli"><a href="compare.html">Compare Colleges</a></li>
+  <li id="topnavli"><a href="info.html">Lookup Colleges</a></li>
+  <li id="topnavli"><a href="Geotest.html">BigMap</a></li>
+  <li id="topnavli"><a href="gauge.html">Test Score Evaluation</a></li>
+  <li id="topnavli"><a href="collegebubble.html">Multi-College Comparison</a></li>            
+</ul>
+      
+    <form action="action_page.php" name="theForm">
+        
+               
+        <fieldset id="formframe">
+            <legend style="text-align:center">
+                <h1>University Info</h1>
+            </legend>
+            
+  <fieldset>
+    <legend><h2>General Info</h2></legend>
+      <table>
+          <tr>
+              <td>
+    <h4>University Name: </h4>
+              </td> 
+              <td>
+              <input type="text" name="name" value="" id="name">
+                  </td>
+              </tr>
+          <tr>
+          <td>
+    <h4>Abbreviation: </h4>
+              </td>      
+              <td>
+    <input type="text" name="abbrev" value="" id="abbrev">
+              </td>
+          </tr>
+          <tr>
+              <td>
+       <h4>Avg. GPA: </h4>
+              </td>
+              <td>
+        <input type="text" name="gpa" value="" id="gpa">
+              </td>
+              </tr>
+        <tr>
+            <td>
+    <h4>Avg. SAT(2400 Scale): </h4>
+            </td>
+          <td>
+                <input type="text" name="sat" value="" id="sat">
+                </td>
+          </tr>
+          <tr>
+              <td>
+    <h4>Avg. ACT: </h4>
+        </td>
+              <td>
+                  <input type="text" name="act" value="" id="act">
+                  </td>
+              </tr>
+          <tr>
+              <td>
+    <h4>Acceptance Rate: </h4>
+      </td>
+              <td>
+      <input type="text" name="accept" value="" id="accept">%
+                  </td>
+          </tr>
+          <tr>
+              <td>
+    <h4>Undergraduate Population: </h4></td>
+              <td>
+              <input type="text" name="under" value="" id="under">
+              </td>
+    </tr>
+          <tr>
+              <td>
+    <h4>Graduate Population: </h4></td>
+              <td>
+              <input type="text" name="graduate" value="" id="graduate">
+              </td>
+    </tr>
+        <tr>
+            <td>
+      <fieldset id="loc">
+          <legend><h4>Location</h4></legend>
+    City <input type="text" name="location" value="" id="city"><br>
+    <p>
+      <label for="card">
+        <span>State</span>
+        <select id="State" name="State Name">
+    <option value="N/A">Please Select</option>
+    <option value="AL">Alabama</option>
+        <option value="AK">Alaska</option>
+        <option value="AZ">Arizona</option>
+        <option value="AR">Arkansas</option>
+        <option value="CA">California</option>
+        <option value="CO">Colorado</option>
+        <option value="CT">Connecticut</option>
+        <option value="DE">Delaware</option>
+        <option value="DC">District Of Columbia</option>
+        <option value="FL">Florida</option>
+        <option value="GA">Georgia</option>
+        <option value="HI">Hawaii</option>
+        <option value="ID">Idaho</option>
+        <option value="IL">Illinois</option>
+        <option value="IN">Indiana</option>
+        <option value="IA">Iowa</option>
+        <option value="KS">Kansas</option>
+        <option value="KY">Kentucky</option>
+        <option value="LA">Louisiana</option>
+        <option value="ME">Maine</option>
+        <option value="MD">Maryland</option>
+        <option value="MA">Massachusetts</option>
+        <option value="MI">Michigan</option>
+        <option value="MN">Minnesota</option>
+        <option value="MS">Mississippi</option>
+        <option value="MO">Missouri</option>
+        <option value="MT">Montana</option>
+        <option value="NE">Nebraska</option>
+        <option value="NV">Nevada</option>
+        <option value="NH">New Hampshire</option>
+        <option value="NJ">New Jersey</option>
+        <option value="NM">New Mexico</option>
+        <option value="NY">New York</option>
+        <option value="NC">North Carolina</option>
+        <option value="ND">North Dakota</option>
+        <option value="OH">Ohio</option>
+        <option value="OK">Oklahoma</option>
+        <option value="OR">Oregon</option>
+        <option value="PA">Pennsylvania</option>
+        <option value="RI">Rhode Island</option>
+        <option value="SC">South Carolina</option>
+        <option value="SD">South Dakota</option>
+        <option value="TN">Tennessee</option>
+        <option value="TX">Texas</option>
+        <option value="UT">Utah</option>
+        <option value="VT">Vermont</option>
+        <option value="VA">Virginia</option>
+        <option value="WA">Washington</option>
+        <option value="WV">West Virginia</option>
+        <option value="WI">Wisconsin</option>
+        <option value="WY">Wyoming</option>
+   
+        </select>
+      </label>
+    </p>
+         
+          </fieldset>
+                 </td>
+       <td>
+      <fieldset style="float:left">
+      <legend><h4>
+          Setting
+          </h4>
+        </legend>
+       
+  <input type="radio" name="area" value="Urban" id="urb"> Urban <br>
+  <input type="radio" name="area" value="Suburban" id="sub"> Suburban<br>
+  <input type="radio" name="area" value="Rural" id="rur"> Rural<br>
+        
+      </fieldset>
+           </td>
+        </tr>
+        </table>
+  </fieldset>
+            
+            
+  <fieldset>
+      <legend><h2>Tuition</h2></legend>
+      <table>
+          <tr>
+              <td>
+     
+      <h4 id="out">Out-of-State Tuition:
+    </h4> 
+              </td>
+              <td>
+                  <input type="text" name="oos" value="" id="oos">
+              </td>  
+               <td>
+                  <fieldset style="float:right">
+      <legend><h4>
+          Type
+          </h4>
+        </legend>
+      <input type="radio" name="type" value="Public" id = "pub"> Public
+  <input type="radio" name="type" value="Private" id = "pri"> Private
+      </fieldset>
+              </td>
+              <tr>
+              <td>
+                  <h4 id="tuition">In-State Tuition:</h4>
+                  </td>
+                  <td>
+                      <input type="text" name="is" value="" id="is">
+          </td>
+          </tr>
+              
+             
+      </table>
+      <p style="font-weight:bold; font-size:13px">Note: If institution is private, enter the same value for in-state and out-of-state.</p>
+  </fieldset>  
+            <center><input id="submit" type=button value="Submit" onclick="addCollege();"></center>
+            </fieldset>
+           
+        
+</form>
+     
+  </body>
+</html>

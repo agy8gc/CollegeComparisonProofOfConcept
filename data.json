@@ -1,0 +1,13 @@
+{"cols": [
+	{"label": "Day of Week", "type": "string"},
+	{"label": "Jason", "type": "number"},
+	{"label": "Kerry", "type": "number"},
+	{"label": "Megan",  "type": "number"},
+	{"label": "Deliveries", "type": "number"}
+], "rows": [
+	{"c": [ {"v": "Monday"}, {"v":21}, {"v":18}, {"v":15}, {"v": 23} ] },
+	{"c": [ {"v": "Tuesday"}, {"v": 20}, {"v": 17}, {"v":27}, {"v":28} ] },
+	{"c": [ {"v": "Wednesday"}, {"v": 39}, {"v": 34}, {"v": 31}, {"v": 42} ] },
+	{"c": [ {"v": "Thursday"}, {"v": 32}, {"v": 37}, {"v": 33}, {"v": 37} ] },
+	{"c": [ {"v": "Friday"}, {"v": 55}, {"v": 58}, {"v": 61}, {"v": 53} ] }
+]}
